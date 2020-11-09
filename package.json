@@ -1,0 +1,38 @@
+{
+	"name": "backend",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "node -r esm app.js",
+		"dev": "nodemon --watch . -r esm app.js"
+	},
+	"type": "module",
+	"dependencies": {
+		"axios": "^0.20.0",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"connect-history-api-fallback": "^1.6.0",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
+		"debug": "^4.2.0",
+		"express": "^4.17.1",
+		"express-async-handler": "^1.1.4",
+		"http-errors": "^1.8.0",
+		"jsonwebtoken": "^8.5.1",
+		"moment": "^2.29.0",
+		"mongoose": "^5.10.7",
+		"morgan": "^1.10.0",
+		"nodemailer": "^6.4.11",
+		"nodemailer-smtp-transport": "^2.7.4"
+	},
+	"devDependencies": {
+		"babel-eslint": "^10.1.0",
+		"babel-preset-env": "^1.7.0",
+		"babel-register": "^6.26.0",
+		"eslint": "^7.12.1",
+		"eslint-config-prettier": "^6.15.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"esm": "^3.2.25",
+		"prettier": "2.1.2"
+	}
+}
