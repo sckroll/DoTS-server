@@ -4,9 +4,17 @@ import smtpTransport from 'nodemailer-smtp-transport'
 import crypto from 'crypto'
 import asyncHandler from 'express-async-handler'
 import Project from '../models/projects'
-import mainConfig from '../config/mail'
+import { DefaultAzureCredential } from '@azure/identity'
+import { SecretClient } from '@azure/keyvault-secrets'
+// import mailConfig from '../config/mail'
 
 const router = Router()
+
+// Azure 비밀키 설정
+const keyVaultName = 'dots-key-vault'
+const KVUri = `https://${keyVaultName}.vault.azure.net`
+const credential = new DefaultAzureCredential()
+const client = new SecretClient(KVUri, credential)
 
 router.post(
   '/',
@@ -16,7 +24,15 @@ router.post(
     const newMember = req.body.newMember
     const project = req.body.project
 
-    const transporter = nodeMailer.createTransport(smtpTransport(mainConfig))
+    const mailConfig = {
+      service: 'Gmail',
+      host: 'smtp.gmail.com',
+      auth: {
+        user: 'kimsc0714@gmail.com',
+        pass: await client.getSecret('mailPassword'),
+      },
+    }
+    const transporter = nodeMailer.createTransport(smtpTransport(mailConfig))
     const firstKey = crypto.randomBytes(256).toString('hex').substr(100, 16)
     const secondKey = crypto.randomBytes(256).toString('hex').substr(200, 16)
     const verifyKey = firstKey + secondKey
