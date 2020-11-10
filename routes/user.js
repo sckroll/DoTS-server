@@ -6,7 +6,7 @@ import moment from 'moment'
 import asyncHandler from 'express-async-handler'
 import User from '../models/users'
 // import jwtConfig from '../config/jwt'
-import jwtConfig from '../../configData/jwt'
+// import jwtConfig from '../../configData/jwt'
 
 const router = Router()
 router.use(cors())
@@ -23,10 +23,12 @@ const signToken = pl => {
     }
 
     const option = {
-      expiresIn: jwtConfig.expireTime,
+      // expiresIn: jwtConfig.expireTime,
+      expiresIn: process.env.JWT_EXPIRE_TIME,
     }
 
-    jwt.sign(payload, jwtConfig.secret, option, (err, token) => {
+    // jwt.sign(payload, jwtConfig.secret, option, (err, token) => {
+    jwt.sign(payload, process.env.JWT_KEY, option, (err, token) => {
       if (err) reject(err)
       resolve(token)
     })
@@ -36,7 +38,8 @@ const signToken = pl => {
 // 토큰 검사 함수
 const verifyToken = t => {
   return new Promise((resolve, reject) => {
-    jwt.verify(t, jwtConfig.secret, (err, v) => {
+    // jwt.verify(t, jwtConfig.secret, (err, v) => {
+    jwt.verify(t, process.env.JWT_KEY, (err, v) => {
       if (err) reject(err)
       resolve(v)
     })
@@ -83,7 +86,8 @@ router.post(
     let userData = req.body
     const result = await User.findOneByEmail(userData.email)
     if (!result) {
-      const hash = await bcrypt.hash(userData.password, jwtConfig.saltFactor)
+      // const hash = await bcrypt.hash(userData.password, jwtConfig.saltFactor)
+      const hash = await bcrypt.hash(userData.password, 10)
       const newUser = {
         email: userData.email,
         first_name: userData.firstName,

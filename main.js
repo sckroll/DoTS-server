@@ -7,7 +7,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import history from 'connect-history-api-fallback'
 // import databaseConfig from './config/database'
-import databaseConfig from '../configData/database'
+// import databaseConfig from '../configData/database'
 import api from './routes'
 
 const app = express()
@@ -38,7 +38,14 @@ app.use(history())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // MongoDB 연결
-mongoose.connect(databaseConfig.uri, databaseConfig.options)
+// mongoose.connect(databaseConfig.uri, databaseConfig.options)
+mongoose.connect(process.env.DB_URI, {
+  dbName: process.env.DB_NAME,
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+})
 
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connetion error'))

@@ -7,10 +7,11 @@ import sgMail from '@sendgrid/mail'
 import Project from '../models/projects'
 // import mailConfig from '../config/mail'
 // import mailConfig from '../../configData/mail'
-import { apiKey } from '../../configData/mail'
+// import { apiKey } from '../../configData/mail'
 
 const router = Router()
-sgMail.setApiKey(apiKey)
+// sgMail.setApiKey(apiKey)
+sgMail.setApiKey(process.env.MAIL_API_KEY)
 
 router.post(
   '/',
