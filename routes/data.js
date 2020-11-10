@@ -8,10 +8,11 @@ import schema from '../models/crawled-data'
 
 const router = Router()
 // const serverURL = 'https://dots-crawler.azurewebsites.net/'
-const serverURL =
-  process.env.NODE_ENV === 'production' || undefined
-    ? 'https://dots-crawler.azurewebsites.net/'
-    : 'http://localhost:5000'
+const serverURL = process.env.NODE_ENV
+  ? process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5000'
+    : 'https://dots-crawler.azurewebsites.net/'
+  : 'https://dots-crawler.azurewebsites.net/'
 
 let Data = null
 
