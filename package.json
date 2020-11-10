@@ -6,7 +6,6 @@
 		"start": "node -r esm app.js",
 		"dev": "nodemon --watch . -r esm app.js"
 	},
-	"type": "module",
 	"dependencies": {
 		"axios": "^0.20.0",
 		"bcryptjs": "^2.4.3",
