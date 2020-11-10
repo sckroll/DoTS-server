@@ -7,10 +7,11 @@ import qs from 'querystring'
 import schema from '../models/crawled-data'
 
 const router = Router()
-const serverURL = 'https://dots-crawler.azurewebsites.net/'
-// process.env.NODE_ENV === 'production'
-//   ? 'https://dots-crawler.azurewebsites.net/'
-//   : 'http://localhost:5000'
+// const serverURL = 'https://dots-crawler.azurewebsites.net/'
+const serverURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://dots-crawler.azurewebsites.net/'
+    : 'http://localhost:5000'
 
 let Data = null
 
