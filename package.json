@@ -7,8 +7,6 @@
 		"dev": "nodemon --watch . -r esm app.js"
 	},
 	"dependencies": {
-		"@azure/identity": "^1.1.0",
-		"@azure/keyvault-secrets": "^4.1.0",
 		"axios": "^0.20.0",
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
