@@ -6,8 +6,6 @@ import logger from 'morgan'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import history from 'connect-history-api-fallback'
-// import { DefaultAzureCredential } from '@azure/identity'
-// import { SecretClient } from '@azure/keyvault-secrets'
 // import databaseConfig from './config/database'
 import databaseConfig from '../configData/database'
 import api from './routes'
@@ -21,12 +19,6 @@ var corsOptions = {
       ? 'https://dots-app.azurewebsites.net'
       : 'http://localhost:8080',
 }
-
-// Azure 비밀키 설정
-// const keyVaultName = 'dots-key-vault'
-// const KVUri = `https://${keyVaultName}.vault.azure.net`
-// const credential = new DefaultAzureCredential()
-// const client = new SecretClient(KVUri, credential)
 
 // 미들웨어 설정
 app.use(logger('combined'))
@@ -47,18 +39,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // MongoDB 연결
 mongoose.connect(databaseConfig.uri, databaseConfig.options)
-// const connectDB = async () => {
-//   const dbUri = await client.getSecret('dbUri')
-//   const dbOptions = {
-//     dbName: 'JMH',
-//     useCreateIndex: true,
-//     useNewUrlParser: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true,
-//   }
-//   await mongoose.connect(dbUri, dbOptions)
-// }
-// connectDB()
 
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connetion error'))

@@ -4,28 +4,12 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import moment from 'moment'
 import asyncHandler from 'express-async-handler'
-// import { DefaultAzureCredential } from '@azure/identity'
-// import { SecretClient } from '@azure/keyvault-secrets'
 import User from '../models/users'
 // import jwtConfig from '../config/jwt'
 import jwtConfig from '../../configData/jwt'
 
 const router = Router()
 router.use(cors())
-
-// Azure 비밀키 설정
-// const keyVaultName = 'dots-key-vault'
-// const KVUri = `https://${keyVaultName}.vault.azure.net`
-// const credential = new DefaultAzureCredential()
-// const client = new SecretClient(KVUri, credential)
-
-// const jwtConfig = (async () => {
-//   return {
-//     secret: await client.getSecret('jwtSecret'), // 비밀키
-//     saltFactor: 10, // bcrypt 해시 알고리즘 적용 횟수
-//     expireTime: await client.getSecret('jwtExpireTime'), // jwt 만료 시간
-//   }
-// })()
 
 // 토큰 생성 함수
 const signToken = pl => {
