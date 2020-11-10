@@ -27,9 +27,9 @@ router.post(
     const verifyKey = firstKey + secondKey
 
     const url =
-      process.env.NODE_ENV === 'production'
-        ? 'https://dots-app.azurewebsites.net'
-        : 'http://localhost:8080'
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:8080'
+        : 'https://dots-app.azurewebsites.net'
 
     const newMemberProfile = {
       email: newMember.email,
